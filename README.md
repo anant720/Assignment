@@ -8,6 +8,12 @@ This repository contains **my assignment work** on top of the Teable 1.8.0 codeb
 
 ---
 
+## Screenshot
+
+![Assignment Screenshot](./assignment.png)
+
+---
+
 ## What I Did — Skip Email Verification on Email Change
 
 ### The Problem
