@@ -15,8 +15,6 @@ import {
   ISendSignupVerificationCodeRo,
   changeEmailRoSchema,
   IChangeEmailRo,
-  sendChangeEmailCodeRoSchema,
-  ISendChangeEmailCodeRo,
 } from '@teable/openapi';
 import { Response, Request } from 'express';
 import { AUTH_SESSION_COOKIE_NAME } from '../../../const';
@@ -32,7 +30,7 @@ export class LocalAuthController {
   constructor(
     private readonly sessionService: SessionService,
     private readonly authService: LocalAuthService
-  ) {}
+  ) { }
 
   @Public()
   @UseGuards(LocalAuthGuard)
@@ -115,16 +113,8 @@ export class LocalAuthController {
     @Res({ passthrough: true }) res: Response,
     @Req() req: Request
   ) {
-    await this.authService.changeEmail(body.email, body.token, body.code);
+    await this.authService.changeEmail(body.email, body.password);
     await this.sessionService.signout(req);
     res.clearCookie(AUTH_SESSION_COOKIE_NAME);
-  }
-
-  @Post('/send-change-email-code')
-  @HttpCode(200)
-  async sendChangeEmailCode(
-    @Body(new ZodValidationPipe(sendChangeEmailCodeRoSchema)) body: ISendChangeEmailCodeRo
-  ) {
-    return this.authService.sendChangeEmailCode(body.email, body.password);
   }
 }

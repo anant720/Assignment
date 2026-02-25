@@ -7,8 +7,7 @@ export const CHANGE_EMAIL = '/auth/change-email';
 
 export const changeEmailRoSchema = z.object({
   email: z.string().email(),
-  token: z.string(),
-  code: z.string(),
+  password: z.string(),
 });
 
 export type IChangeEmailRo = z.infer<typeof changeEmailRoSchema>;
